@@ -49,9 +49,9 @@ img{display:block;max-width:100%;user-select:none;-webkit-user-drag:none}
 .count-btn{display:block;border:0;padding:0;min-width:0;width:100%;aspect-ratio:360/169;background-position:center;background-size:100% 100%;background-repeat:no-repeat;transform-origin:50% 54%;will-change:transform,filter;transition:transform 190ms cubic-bezier(.18,1.4,.4,1),filter 160ms ease}
 .minus{background-image:url("./09_minus_button_idle.png")}
 .plus{background-image:url("./10_plus_button_idle.png")}
-.count-btn:not(:disabled):active{transform:translate3d(0,2px,0) scale(.987);filter:brightness(.87) contrast(1.035);transition:transform 65ms ease-out,filter 65ms ease-out}
-.minus:not(:disabled):active{background-image:url("./09_minus_button_pressed.png")}
-.plus:not(:disabled):active{background-image:url("./10_plus_button_pressed.png")}
+.count-btn:not(:disabled):is(:active,.is-pressed){transform:translate3d(0,2px,0) scale(.987);filter:brightness(.87) contrast(1.035);transition:transform 45ms ease-out,filter 45ms ease-out}
+.minus:not(:disabled):is(:active,.is-pressed){background-image:url("./09_minus_button_pressed.png")}
+.plus:not(:disabled):is(:active,.is-pressed){background-image:url("./10_plus_button_pressed.png")}
 .minus:disabled{background-image:url("./09_minus_button_disabled.png");cursor:default;filter:none;transform:none;will-change:auto}
 .reset{border:0;padding:0;width:100%;aspect-ratio:740/116;background:url("./11_reset_button.png") center/100% 100% no-repeat}
 .reset:active{transform:translateY(2px);filter:brightness(.75)}
