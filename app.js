@@ -47,6 +47,36 @@ function notice(t){
   clearTimeout(timer);
   timer=setTimeout(()=>$('message').classList.remove('visible'),1800);
 }
+// Keep tactile feedback visible briefly even after a quick iOS tap.
+function installPressFeedback(button){
+  const MIN_PRESS_MS=135;
+  let pressedAt=0,releaseTimer=0;
+  const start=()=>{
+    if(button.disabled)return;
+    clearTimeout(releaseTimer);
+    pressedAt=performance.now();
+    button.classList.add('is-pressed');
+  };
+  const end=()=>{
+    if(!button.classList.contains('is-pressed'))return;
+    clearTimeout(releaseTimer);
+    const remaining=Math.max(0,MIN_PRESS_MS-(performance.now()-pressedAt));
+    releaseTimer=setTimeout(()=>button.classList.remove('is-pressed'),remaining);
+  };
+  button.addEventListener('pointerdown',start);
+  button.addEventListener('pointerup',end);
+  button.addEventListener('pointercancel',end);
+  button.addEventListener('pointerleave',end);
+  button.addEventListener('blur',end);
+  button.addEventListener('click',()=>{
+    if(!button.classList.contains('is-pressed')){start();end()}
+  });
+}
+['plus','minus'].forEach(id=>installPressFeedback($(id)));
+['09_minus_button_pressed.png','10_plus_button_pressed.png'].forEach(src=>{
+  const img=new Image();
+  img.src='./'+src;
+});
 $('plus').addEventListener('click',()=>change(1));
 $('minus').addEventListener('click',()=>change(-1));
 $('plan').addEventListener('input',e=>{
