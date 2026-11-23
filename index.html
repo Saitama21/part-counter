@@ -1,0 +1,13 @@
+<!doctype html>
+<html lang="ru"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><meta name="theme-color" content="#090c0e"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-status-bar-style" content="black-translucent"><title>Production Center</title><link rel="manifest" href="./manifest.webmanifest"><link rel="icon" type="image/svg+xml" href="./icon.svg"><link rel="stylesheet" href="./style.css"></head>
+<body><main class="app-shell"><article class="machine">
+<header class="head"><span class="cog">⚙</span><strong>PRODUCTION<br>CENTER</strong><span class="status"><i></i>СЧЁТЧИК<br>ДЕТАЛЕЙ</span></header>
+<section class="plan metal"><label for="plan">План партии</label><div class="plan-row"><span class="pencil">✎</span><input id="plan" type="number" min="1" max="99999999" inputmode="numeric" placeholder="" aria-label="План партии, штук"><span class="unit">шт.</span><div class="stepper"><button id="planUp" aria-label="Увеличить план">⌃</button><button id="planDown" aria-label="Уменьшить план">⌄</button></div></div></section>
+<section class="dashboard metal"><div class="main-grid"><div class="ready"><label>Готово</label><div class="led-screen"><output id="done">0</output><span>шт.</span></div></div><div class="ring-wrap"><svg id="ring" viewBox="0 0 200 200" aria-label="Выполнение плана" role="img"><g id="ringSegments"></g></svg><div class="ring-center"><output id="pct">0%</output><small>Выполнение<br>плана</small></div></div></div><div class="stats"><div><span class="stat-icon">◎</span><label>Осталось</label><div class="stat-value"><output id="remaining">0</output><span>шт.</span></div></div><div><span class="stat-icon">▣</span><label>В запасе</label><div class="stat-value"><output id="reserve">+0</output><span>шт.</span></div></div></div></section>
+<div class="bar metal"><div id="barSegments" aria-label="Прогресс выполнения"></div></div>
+<div class="controls"><button id="minus" class="steel red" aria-label="Минус одна деталь">−1</button><button id="plus" class="steel green" aria-label="Плюс одна деталь">+1</button></div>
+<button id="reset" class="reset steel"><span>⟳</span> Сброс счётчика</button>
+</article><p id="message" role="status" aria-live="polite" class="message"></p></main>
+<nav class="dock" aria-label="Меню"><button id="newBatch">▤<small>Новая партия</small></button><button id="history">▥<small>История</small></button><button id="settings">⚙<small>Настройки</small></button></nav>
+<dialog id="modal"><h2 id="modalTitle"></h2><div id="modalBody"></div><div class="modal-actions" id="modalActions"></div></dialog>
+<script src="./app.js" defer></script></body></html>
