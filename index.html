@@ -1,13 +1,81 @@
 <!doctype html>
-<html lang="ru"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><meta name="theme-color" content="#090c0e"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-status-bar-style" content="black-translucent"><title>Production Center</title><link rel="manifest" href="./manifest.webmanifest"><link rel="icon" type="image/svg+xml" href="./icon.svg"><link rel="stylesheet" href="./style.css"></head>
-<body><main class="app-shell"><article class="machine">
-<header class="head"><span class="cog">⚙</span><strong>PRODUCTION<br>CENTER</strong><span class="status"><i></i>СЧЁТЧИК<br>ДЕТАЛЕЙ</span></header>
-<section class="plan metal"><label for="plan">План партии</label><div class="plan-row"><span class="pencil">✎</span><input id="plan" type="number" min="1" max="99999999" inputmode="numeric" placeholder="" aria-label="План партии, штук"><span class="unit">шт.</span><div class="stepper"><button id="planUp" aria-label="Увеличить план">⌃</button><button id="planDown" aria-label="Уменьшить план">⌄</button></div></div></section>
-<section class="dashboard metal"><div class="main-grid"><div class="ready"><label>Готово</label><div class="led-screen"><output id="done">0</output><span>шт.</span></div></div><div class="ring-wrap"><svg id="ring" viewBox="0 0 200 200" aria-label="Выполнение плана" role="img"><g id="ringSegments"></g></svg><div class="ring-center"><output id="pct">0%</output><small>Выполнение<br>плана</small></div></div></div><div class="stats"><div><span class="stat-icon">◎</span><label>Осталось</label><div class="stat-value"><output id="remaining">0</output><span>шт.</span></div></div><div><span class="stat-icon">▣</span><label>В запасе</label><div class="stat-value"><output id="reserve">+0</output><span>шт.</span></div></div></div></section>
-<div class="bar metal"><div id="barSegments" aria-label="Прогресс выполнения"></div></div>
-<div class="controls"><button id="minus" class="steel red" aria-label="Минус одна деталь">−1</button><button id="plus" class="steel green" aria-label="Плюс одна деталь">+1</button></div>
-<button id="reset" class="reset steel"><span>⟳</span> Сброс счётчика</button>
-</article><p id="message" role="status" aria-live="polite" class="message"></p></main>
-<nav class="dock" aria-label="Меню"><button id="newBatch">▤<small>Новая партия</small></button><button id="history">▥<small>История</small></button><button id="settings">⚙<small>Настройки</small></button></nav>
-<dialog id="modal"><h2 id="modalTitle"></h2><div id="modalBody"></div><div class="modal-actions" id="modalActions"></div></dialog>
-<script src="./app.js" defer></script></body></html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+  <meta name="theme-color" content="#080c0e">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="apple-mobile-web-app-title" content="Production">
+  <meta name="description" content="Офлайн-счётчик деталей: план, факт и запас">
+  <title>Production Center</title>
+  <link rel="manifest" href="./manifest.webmanifest">
+  <link rel="icon" href="./icon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="./style.css">
+</head>
+<body>
+<main class="app-shell">
+  <article class="machine" aria-label="Production Center — счётчик деталей">
+    <header class="head">
+      <img src="./01_header.png" alt="PRODUCTION CENTER — Счётчик деталей" draggable="false">
+    </header>
+
+    <section class="plan-panel" aria-label="План партии">
+      <label class="sr-only" for="plan">План партии, штук</label>
+      <input id="plan" type="number" inputmode="numeric" pattern="[0-9]*" min="1" max="99999999" aria-label="План партии, штук">
+      <div class="plan-stepper">
+        <button id="planUp" type="button" aria-label="Увеличить план на одну деталь"></button>
+        <button id="planDown" type="button" aria-label="Уменьшить план на одну деталь"></button>
+      </div>
+    </section>
+
+    <section class="dashboard" aria-label="Результаты партии">
+      <div class="ready-heading">Готово</div>
+      <div class="led-screen">
+        <output id="done" aria-label="Готово деталей">0</output><span>шт.</span>
+      </div>
+      <div class="ring-wrap" role="img" aria-label="Выполнение плана">
+        <img class="ring-base" src="./05_progress_ring_clean.png" alt="" draggable="false">
+        <svg id="ring" viewBox="0 0 286 271" aria-hidden="true" focusable="false"><g id="ringSegments"></g></svg>
+        <div class="ring-center"><output id="pct">0%</output><small>Выполнение<br>плана</small></div>
+      </div>
+      <div class="stats">
+        <div class="stat stat-left">
+          <div class="stat-heading">Осталось</div>
+          <div class="stat-value"><output id="remaining">0</output><span>шт.</span></div>
+        </div>
+        <div class="stat stat-right">
+          <div class="stat-heading">В запасе</div>
+          <div class="stat-value"><output id="reserve">+0</output><span>шт.</span></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="bar" aria-label="Нижняя шкала прогресса">
+      <img src="./08_progress_bar.png" class="bar-base" alt="" draggable="false">
+      <div id="barSegments" aria-hidden="true"></div>
+    </section>
+
+    <div class="controls">
+      <button id="minus" class="count-btn minus" type="button" aria-label="Минус одна деталь"></button>
+      <button id="plus" class="count-btn plus" type="button" aria-label="Плюс одна деталь"></button>
+    </div>
+    <button id="reset" class="reset" type="button" aria-label="Сброс счётчика"></button>
+  </article>
+  <p id="message" role="status" aria-live="polite" class="message"></p>
+</main>
+
+<nav class="dock" aria-label="Разделы приложения">
+  <button id="newBatch" type="button" aria-label="Новая партия"></button>
+  <button id="history" type="button" aria-label="История партий"></button>
+  <button id="settings" type="button" aria-label="Настройки"></button>
+</nav>
+
+<dialog id="modal" aria-labelledby="modalTitle">
+  <h2 id="modalTitle"></h2>
+  <div id="modalBody"></div>
+  <div id="modalActions" class="modal-actions"></div>
+</dialog>
+<script defer src="./app.js"></script>
+</body>
+</html>
