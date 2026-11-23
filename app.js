@@ -1,4 +1,11 @@
 'use strict';
+// Kiosk-style touch surface: prevent page zoom and text selection.
+for(const type of ['gesturestart','gesturechange','gestureend']){
+  document.addEventListener(type,e=>e.preventDefault(),{passive:false});
+}
+document.addEventListener('touchmove',e=>{if(e.touches.length>1)e.preventDefault()},{passive:false});
+document.addEventListener('dblclick',e=>e.preventDefault());
+document.addEventListener('selectstart',e=>e.preventDefault());
 const K='production-center-v1';
 const $=id=>document.getElementById(id);
 const NS='http://www.w3.org/2000/svg';
