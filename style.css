@@ -34,13 +34,13 @@ img{display:block;max-width:100%;user-select:none;-webkit-user-drag:none}
 .ring-center{position:absolute;left:19%;right:19%;top:25%;bottom:25%;display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center}
 .ring-center output{font-size:clamp(19px,5.5vw,30px);font-weight:850;color:#8aff9f;font-variant-numeric:tabular-nums;text-shadow:0 0 8px #13e760}
 .ring-center small{font-size:clamp(7px,2vw,11px);line-height:1.2;color:#c0cac3}
-.stats{position:absolute;inset:70% 5.2% 4.5%;display:grid;grid-template-columns:1fr 1fr;gap:2.5%}
-.stat{position:relative;min-width:0;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:2% 4%}
+.stats{position:absolute;inset:72% 7.2% 7%;display:grid;grid-template-columns:1fr 1fr;gap:3%}
+.stat{position:relative;min-width:0;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:5% 8%;overflow:hidden;isolation:isolate}
 .stat-left{background:url("./06_stat_panel_clean.png") center/100% 100% no-repeat}
 .stat-right{background:url("./07_stat_panel_clean.png") center/100% 100% no-repeat}
 .stat-heading{font-size:clamp(10px,3.1vw,15px);font-weight:700;color:#b6c6b9;text-shadow:0 2px 3px #000;white-space:nowrap}
-.stat-value{display:flex;align-items:baseline;justify-content:center;gap:5px;max-width:100%}
-.stat-value output{font-family:ui-monospace,"SFMono-Regular",Menlo,monospace;font-size:clamp(19px,5.8vw,31px);font-weight:850;color:#7cff9c;font-variant-numeric:tabular-nums;text-shadow:0 0 10px #1eff58;white-space:nowrap;letter-spacing:-1px}
+.stat-value{display:flex;align-items:baseline;justify-content:center;gap:4px;max-width:92%;min-width:0;white-space:nowrap}
+.stat-value output{font-family:ui-monospace,"SFMono-Regular",Menlo,monospace;font-size:clamp(19px,5.8vw,31px);font-weight:850;color:#7cff9c;font-variant-numeric:tabular-nums;text-shadow:0 0 7px #1eff58;white-space:nowrap;letter-spacing:-1px}
 .stat-value span{color:#becbbf;font-size:clamp(9px,2.5vw,12px)}
 .bar{position:relative;width:100%;aspect-ratio:738/56}
 .bar-base{position:absolute;inset:0;width:100%;height:100%;filter:grayscale(1) brightness(.28)}
