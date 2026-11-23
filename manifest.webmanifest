@@ -1,0 +1,19 @@
+{
+  "name": "Production Center — счётчик деталей",
+  "short_name": "Production",
+  "description": "Офлайн-счётчик деталей и запаса",
+  "start_url": "./",
+  "scope": "./",
+  "display": "standalone",
+  "background_color": "#080c0e",
+  "theme_color": "#080c0e",
+  "lang": "ru",
+  "icons": [
+    {
+      "src": "./icon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any"
+    }
+  ]
+}
